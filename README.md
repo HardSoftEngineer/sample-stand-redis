@@ -13,3 +13,7 @@ Minimal Redis stand for local experiments and knowledge refresh.
 - Docker Engine
 - Docker Compose (v2)
 - Linux (tested only)
+
+More docs details ->
+
+[Stand state](docs/stand-state.md)
