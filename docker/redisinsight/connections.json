@@ -1,0 +1,13 @@
+{
+  "connections": [
+    {
+      "id": "sample-stand-redis",
+      "name": "Sample Stand Redis",
+      "host": "sample-stand-redis",
+      "port": 6379,
+      "username": "default",
+      "password": "",
+      "tls": false
+    }
+  ]
+}
