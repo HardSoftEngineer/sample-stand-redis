@@ -1,9 +1,8 @@
-from redis_client import get_client
-
-
 def do(redis_client):
     key = "hello"
     value = "world"
+
+    redis_client.delete(key)
     
     # set
     redis_client.set(key, value)
@@ -16,7 +15,3 @@ def do(redis_client):
     assert value == value_redis, (
         f"Value mismatch: expected={value}, actual={value_redis}"
     )
-
-if __name__ == "__main__":
-    redis_client = get_client()
-    do(redis_client=redis_client)
