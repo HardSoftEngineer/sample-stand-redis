@@ -23,6 +23,17 @@ services:
     environment:
       - RI_STDOUT_LOGGER=true
 
+  python:
+    build: ./python
+    container_name: redis-python
+    volumes:
+      - ../python:/app
+    depends_on:
+      - redis
+    environment:
+      REDIS_HOST: sample-stand-redis
+      REDIS_PORT: 6379
+
 volumes:
   sample-stand-redis-data:
   sample-stand-redisinsight-db:
