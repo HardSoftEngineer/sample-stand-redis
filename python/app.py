@@ -36,8 +36,9 @@ class Application:
         module.do(redis_client=self.redis_client)
 
     def get_all_example_names(self) -> list[str]:
-        example_names = self.examples.keys()
-        print(f"example_names: {example_names} type: {type(example_names)} type[0]: {type(example_names[0])}")
+        example_names = list(self.examples.keys())
+        if example_names:
+            print(f"example_names: {example_names}")
         return example_names
 
     def parse_example_names(self, example_names_str: str | None) -> list[str]:
