@@ -35,13 +35,39 @@ class Application:
         module = self.get_example_module(name)
         module.do(redis_client=self.redis_client)
 
-    def run_example_names(self, example_names):
-        # 
+    def get_all_example_names(self) -> list[str]:
+        example_names = self.examples.keys()
+        print(f"example_names: {example_names} type: {type(example_names)} type[0]: {type(example_names[0])}")
+        return example_names
+
+    def parse_example_names(self, example_names_str: str | None) -> list[str]:
+        """
+        Converts the argument string to a list.
+        - None        -> []
+        - "a"         -> ["a"]
+        - "a,b"       -> ["a", "b"]
+        - "a, b ,c"   -> ["a", "b", "c"]
+        """
+        if not example_names_str:
+            return []
+
+        return [
+            name.strip()
+            for name in example_names_str.split(",")
+            if name.strip()
+        ]
+
+    def prepare_example_names(self, example_names):
         if example_names is None:
             print("Get empty arg example_name, set default all")
-            example_names = self.examples.keys()
+            example_names_run = self.get_all_example_names()
+        elif isinstance(example_names, str):
+            example_names_run = self.parse_example_names(example_names)
+        return example_names_run
 
-        for example_name in example_names:
+    def run_example_names(self, example_names):
+        example_names_run = self.prepare_example_names(example_names)
+        for example_name in example_names_run:
             try:
                 print(f"\n=== {example_name} ===")
                 self.run_module(example_name)
